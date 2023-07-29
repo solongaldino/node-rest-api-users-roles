@@ -1,0 +1,19 @@
+{
+  "name": "rest-api-users-roles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solongaldino/node-rest-api-users-roles.git"
+  },
+  "author": "Solon Galdino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/solongaldino/node-rest-api-users-roles/issues"
+  },
+  "homepage": "https://github.com/solongaldino/node-rest-api-users-roles#readme"
+}
