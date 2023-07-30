@@ -14,4 +14,6 @@ app.use(routes);
 
 const serverPort = 3333;
 
-app.listen(serverPort, () => console.info(`Server is running on PORT ${serverPort}`));
+app.listen(serverPort, () =>
+  console.info(`Server is running on PORT ${serverPort}`)
+);
