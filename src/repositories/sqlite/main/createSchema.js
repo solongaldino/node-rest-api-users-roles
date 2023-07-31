@@ -1,13 +1,6 @@
-const sqlite3 = require("sqlite3").verbose();
-const sqlite = require("sqlite");
+const getConection = require("./getConection");
 
-module.exports = {
-  getConection: () =>
-    sqlite.open({
-      filename: "./database.db",
-      driver: sqlite3.Database,
-    }),
-  createSchema: async () => {
+module.exports = async () => {
     const SQL = `CREATE TABLE tb_users (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               name TEXT NOT NULL,
@@ -24,10 +17,9 @@ module.exports = {
               FOREIGN KEY (fk_id_user) REFERENCES tb_users(id)
           );`;
 
-    const conn = await this.getConection();
+    const conn = await getConection();
 
     conn.run(SQL);
 
     console.log("Create schema sqlite.");
-  },
-};
+  };

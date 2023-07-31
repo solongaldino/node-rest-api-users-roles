@@ -1,4 +1,4 @@
 module.exports = {
-  MainRepositorySqlite: require("./MainRepositorySqlite"),
-  UserRepositorySqlite: require("./UserRepositorySqlite"),
+  MainRepositorySqlite: require("./main"),
+  UserRepositorySqlite: require("./user"),
 };
