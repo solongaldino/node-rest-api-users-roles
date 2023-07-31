@@ -1,10 +1,10 @@
+const { UserUseCase } = require("../../useCases");
+
 module.exports = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    await UserRepositorySqlite.create({ email, password });
-    res.status(201).send({
-      message: "Usuário criado com sucesso",
-    });
+    const response = await UserUseCase.login({ email, password });
+    res.status(200).send(response);
   } catch (error) {
     next(error);
   }
