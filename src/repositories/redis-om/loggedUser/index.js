@@ -1,5 +1,5 @@
 module.exports = {
-  getById: require("./getById"),
+  findAllById: require("./findAllById"),
   save: require("./save"),
   schema: require("./schema"),
 };
