@@ -21,10 +21,7 @@ function generationToken(
 module.exports = {
   login: (params) => {
     return {
-      refreshToken: generationToken(
-        params,
-        expiresJwtRefreshTokenInSeconds
-      ),
+      refreshToken: generationToken(params, expiresJwtRefreshTokenInSeconds),
       accessToken: generationToken(params),
     };
   },
@@ -34,4 +31,5 @@ module.exports = {
   decode: (token) => {
     return jwt.decode(token);
   },
+  expiresJwtAccessTokenInSeconds,
 };
