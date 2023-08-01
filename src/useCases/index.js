@@ -1,3 +1,4 @@
 module.exports = {
-    UserUseCase: require("./user")
+    RoleUseCase: require("./role"),
+    UserUseCase: require("./user"),
 }
