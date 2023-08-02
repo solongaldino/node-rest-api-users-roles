@@ -1,13 +1,16 @@
 const { ApiError, AuthJwt } = require("../../utils");
-const { UserRepositorySqlite } = require("../../repositories/sqlite");
+const {
+  UserRepositorySqlite,
+  RoleRepositorySqlite,
+} = require("../../repositories/sqlite");
 const {
   LoggedUserRepositoryRedisOM,
   MainRepositoryRedisOM,
 } = require("../../repositories/redis-om");
 
 async function getLoggedUserById(id) {
-  let loggedUserData = await LoggedUserRepositoryRedisOM.getById(id);
-  console.log("Redis query", loggedUserData);
+  let loggedUserData = await LoggedUserRepositoryRedisOM.findAllById(id);
+
   if (loggedUserData.length <= 0) {
     const userSqlite = await UserRepositorySqlite.findById(id);
 
@@ -15,9 +18,22 @@ async function getLoggedUserById(id) {
       throw new Error("User not found");
     }
 
+    const roles = await RoleRepositorySqlite.findAllByUserId(id);
+
+    if (roles.length <= 0) {
+      throw new Error("Roles not found");
+    }
+
     loggedUserData = await LoggedUserRepositoryRedisOM.save({
       id: userSqlite.id,
       name: userSqlite.name,
+      email: userSqlite.email,
+      created_at: userSqlite.created_at,
+      roles: roles.map((item) => ({
+        id: item.id,
+        value: item.value,
+        created_at: item.created_at,
+      })),
     });
 
     await MainRepositoryRedisOM.expire(
@@ -27,7 +43,7 @@ async function getLoggedUserById(id) {
     );
   }
 
-  return loggedUserData;
+  return loggedUserData[0];
 }
 
 module.exports = async (req, res, next) => {
