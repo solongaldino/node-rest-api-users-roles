@@ -41,6 +41,8 @@ async function getLoggedUserById(id) {
       loggedUserData,
       AuthJwt.expiresJwtAccessTokenInSeconds
     );
+
+    return loggedUserData;
   }
 
   return loggedUserData[0];
